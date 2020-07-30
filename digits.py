@@ -7,8 +7,9 @@ import matplotlib.pylab as plt
 
 if __name__ == '__main__':
     sk_digits = load_digits()
-    pd_data = pd.DataFrame(data=sk_digits.data, columns=sk_digits.feature_names)
-    
+    feature_names = ['pixel_{}_{}'.format(feature_index//8, feature_index%8) for feature_index in range(sk_digits.data.shape[1])]
+    pd_data = pd.DataFrame(data=sk_digits.data, columns=feature_names)
+
     curdir = os.path.dirname(os.path.abspath(__file__))
     url = ['file://' + os.path.join(curdir, 'digits/{}.png'.format(index)) for index in range(len(sk_digits.images))]
     pd_data['url'] = url
